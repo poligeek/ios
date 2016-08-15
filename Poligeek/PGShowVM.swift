@@ -2,6 +2,7 @@ import UIKit
 
 class PGShowVM: PGTableViewVM {
     let show: PGShow
+    var displayWebPage: ((URL) -> Void)?
 
     init(show: PGShow) {
         self.show = show
@@ -41,9 +42,16 @@ class PGShowVM: PGTableViewVM {
         downloadVM.onSelect = {
             print("[TODO] Download  \(show.titleWithNumber)")
         }
+
+        let notesVM = PGHTMLVM(show.text)
+        notesVM.vmType = PGShowVMTypeIds.notes.rawValue
+        notesVM.hypertextLinkSelected = { (url) in
+            self.displayWebPage?(url)
+        }
+
         self.sectionViewModels = [PGTableViewSectionVM(viewModels: [coverVM, titleVM, dateVM]),
-                                  PGTableViewSectionVM(viewModels: [])]
                                   PGTableViewSectionVM(viewModels: [listenVM, downloadVM]),
+                                  PGTableViewSectionVM(viewModels: [notesVM]),]
     }
 }
 
@@ -74,6 +82,13 @@ class PGTextVM: PGViewModel {
     }
 }
 
+class PGHTMLVM: PGViewModel {
+    var text: String
+    var hypertextLinkSelected: ((URL) -> Void)?
+
+    init(_ text: String) {
+        self.text = text
+        super.init()
     }
 }
 
@@ -83,4 +98,5 @@ enum PGShowVMTypeIds: String {
     case date
     case listen
     case downloadShare
+    case notes
 }
