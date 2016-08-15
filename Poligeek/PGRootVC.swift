@@ -13,9 +13,9 @@ class PGRootVC: UICollectionViewController {
 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = PGUI.margin * 2
-        flowLayout.minimumInteritemSpacing = PGUI.margin
-        flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        flowLayout.minimumLineSpacing = PGUI.margin
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
         super.init(collectionViewLayout: flowLayout)
     }
@@ -34,7 +34,7 @@ class PGRootVC: UICollectionViewController {
 
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "SFMono-Heavy", size: 24)!,
                                                                         NSForegroundColorAttributeName: PGUI.yellowColor]
-        self.title = "POLIGEEK"
+        self.title = NSLocalizedString("ui.poligeek", comment: "").localizedUppercase
     }
 
     required init?(coder aDecoder: NSCoder) {

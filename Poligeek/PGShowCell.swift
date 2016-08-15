@@ -10,7 +10,7 @@ class PGRootShowCell: UICollectionViewCell {
 
         self.coverView.image = UIImage(named: "cover")
         self.coverView.translatesAutoresizingMaskIntoConstraints = false
-        self.coverView.layer.cornerRadius = 3
+        self.coverView.layer.cornerRadius = 4
         self.coverView.layer.masksToBounds = true
         self.coverView.backgroundColor = UIColor(white: 0, alpha: 0.1)
 
@@ -21,17 +21,18 @@ class PGRootShowCell: UICollectionViewCell {
         self.addSubview(self.coverView)
         self.addSubview(self.dateLabel)
 
-        self.coverView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.coverView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.coverView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        self.coverView.topAnchor.constraint(equalTo: self.topAnchor, constant: PGUI.margin / 2.0).isActive = true
+        self.coverView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: PGUI.margin / 2.0).isActive = true
+        self.coverView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -PGUI.margin / 2.0).isActive = true
         self.coverView.widthAnchor.constraint(equalTo: self.coverView.heightAnchor).isActive = true
 
         self.dateLabel.topAnchor.constraint(equalTo: self.coverView.bottomAnchor, constant: PGUI.margin / 2.0).isActive = true
-        self.dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.dateLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        self.dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: PGUI.margin / 2.0).isActive = true
+        self.dateLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -PGUI.margin / 2.0).isActive = true
+        self.dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -PGUI.margin / 2.0).isActive = true
 
         self.selectedBackgroundView = UIView()
+        self.selectedBackgroundView?.layer.cornerRadius = 4
         self.selectedBackgroundView?.backgroundColor = UIColor(white: 0, alpha: 0.1)
     }
 
