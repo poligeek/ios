@@ -22,8 +22,28 @@ class PGShowVM: PGTableViewVM {
         dateVM.textAlignment = .center
         dateVM.textColor = UIColor.lightGray
 
+        let listenVM = PGTextVM(NSLocalizedString("ui.show.listen", comment: ""))
+        listenVM.vmType = PGShowVMTypeIds.listen.rawValue
+        listenVM.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+        listenVM.textAlignment = .center
+        listenVM.textColor = PGUI.tintColor
+        listenVM.isSelectable = true
+        listenVM.onSelect = {
+            print("[TODO] Listen \(show.titleWithNumber)")
+        }
+
+        let downloadVM = PGTextVM(NSLocalizedString("ui.show.download", comment: ""))
+        downloadVM.vmType = PGShowVMTypeIds.downloadShare.rawValue
+        downloadVM.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+        downloadVM.textAlignment = .center
+        downloadVM.textColor = PGUI.tintColor
+        downloadVM.isSelectable = true
+        downloadVM.onSelect = {
+            print("[TODO] Download  \(show.titleWithNumber)")
+        }
         self.sectionViewModels = [PGTableViewSectionVM(viewModels: [coverVM, titleVM, dateVM]),
                                   PGTableViewSectionVM(viewModels: [])]
+                                  PGTableViewSectionVM(viewModels: [listenVM, downloadVM]),
     }
 }
 
@@ -42,17 +62,18 @@ class PGTextVM: PGViewModel {
     var textAlignment = NSTextAlignment.left
     var textColor = UIColor.darkText
 
+    var onSelect: (() -> Void)?
+
     init(_ text: String) {
         self.text = text
         super.init()
     }
 
-    override func isSelectable() -> Bool {
-        return false
-    }
-
     override func select() {
-        
+        self.onSelect?()
+    }
+}
+
     }
 }
 
@@ -60,4 +81,6 @@ enum PGShowVMTypeIds: String {
     case cover
     case title
     case date
+    case listen
+    case downloadShare
 }

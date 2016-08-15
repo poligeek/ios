@@ -40,6 +40,8 @@ class PGTextCell: PGTableViewCell {
         self.label.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: PGUI.cellInset.top).isActive = true
         self.label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -PGUI.cellInset.right).isActive = true
         self.label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -PGUI.cellInset.bottom).isActive = true
+
+        self.contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: PGUI.cellHeight).isActive = true
     }
 
     override func pg_configure(viewModel: PGViewModel) {
