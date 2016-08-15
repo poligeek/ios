@@ -79,7 +79,7 @@ class PGTableViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(cellClass), for: indexPath)
 
         if let castedCell = cell as? PGTableViewCell {
-            castedCell.pg_configure(viewModel: viewModel);
+            castedCell.pg_configure(viewModel: viewModel)
         }
 
         return cell
