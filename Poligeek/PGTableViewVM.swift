@@ -29,7 +29,7 @@ class PGTableViewVM {
 
     func canSelectViewModel(indexPath: IndexPath) -> Bool {
         let vm = self.viewModel(indexPath: indexPath)
-        return vm.isSelectable()
+        return vm.isSelectable
     }
 
     func select(indexPath: IndexPath) {

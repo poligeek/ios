@@ -34,14 +34,6 @@ class PGShowCoverVM: PGViewModel {
         self.coverPath = "cover"
         super.init()
     }
-
-    override func isSelectable() -> Bool {
-        return false
-    }
-
-    override func select() {
-
-    }
 }
 
 class PGTextVM: PGViewModel {

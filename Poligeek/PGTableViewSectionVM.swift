@@ -32,7 +32,7 @@ class PGTableViewSectionVM: PGTableViewSectionVMProtocol {
 
     func canSelectViewModel(index: Int) -> Bool {
         let vm = self.viewModel(index: index)
-        return vm.isSelectable()
+        return vm.isSelectable
     }
 
     func select(index: Int) {

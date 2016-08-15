@@ -2,14 +2,14 @@ import Foundation
 
 protocol PGViewModelProtocol {
     var vmType: String { get }
+    var isSelectable: Bool { get }
 
-    func isSelectable() -> Bool
     func select()
 }
 
 class PGViewModel: NSObject, PGViewModelProtocol {
     var vmType: String = ""
+    var isSelectable: Bool = false
 
-    func isSelectable() -> Bool { return false }
     func select() { }
 }
