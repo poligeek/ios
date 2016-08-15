@@ -17,6 +17,7 @@
 		A62DA6D61D5F41CC00930FAA /* PGTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62DA6D51D5F41CC00930FAA /* PGTableViewCell.swift */; };
 		A62DA6D81D5F619100930FAA /* PGShowHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62DA6D71D5F619100930FAA /* PGShowHelpers.swift */; };
 		A62DA6DA1D5FCB2A00930FAA /* SFMono-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A62DA6D91D5FCB2A00930FAA /* SFMono-Heavy.otf */; };
+		A62DA6EC1D611C0F00930FAA /* PGColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62DA6EB1D611C0F00930FAA /* PGColorHelper.swift */; };
 		A6F257C61D560E780028C5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F257C51D560E780028C5B6 /* AppDelegate.swift */; };
 		A6F257C81D560E780028C5B6 /* PGRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F257C71D560E780028C5B6 /* PGRootVC.swift */; };
 		A6F257CD1D560E780028C5B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6F257CC1D560E780028C5B6 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		A62DA6D51D5F41CC00930FAA /* PGTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGTableViewCell.swift; sourceTree = "<group>"; };
 		A62DA6D71D5F619100930FAA /* PGShowHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGShowHelpers.swift; sourceTree = "<group>"; };
 		A62DA6D91D5FCB2A00930FAA /* SFMono-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Heavy.otf"; sourceTree = "<group>"; };
+		A62DA6EB1D611C0F00930FAA /* PGColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGColorHelper.swift; sourceTree = "<group>"; };
 		A6F257C21D560E780028C5B6 /* Poligeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poligeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6F257C51D560E780028C5B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A6F257C71D560E780028C5B6 /* PGRootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PGRootVC.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -157,6 +159,7 @@
 				A6F257E31D5680120028C5B6 /* PGViewControllerHelpers.swift */,
 				A6F257EA1D5694490028C5B6 /* PGDateHelpers.swift */,
 				A6F257EE1D576A810028C5B6 /* PGViewHelpers.swift */,
+				A62DA6EB1D611C0F00930FAA /* PGColorHelper.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A62DA6EC1D611C0F00930FAA /* PGColorHelper.swift in Sources */,
 				A62DA6B71D5E681800930FAA /* PGShowCells.swift in Sources */,
 				A6F257D81D56151B0028C5B6 /* PGShow.swift in Sources */,
 				A6F257ED1D575B510028C5B6 /* PGUI.swift in Sources */,
