@@ -48,7 +48,7 @@ class PGRootVC: UICollectionViewController {
 
         let width = (availableWidth - (numberOfItems - 1) * self.flowLayout.minimumInteritemSpacing) / CGFloat(numberOfItems)
 
-        let labelHeight = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1).lineHeight
+        let labelHeight = UIFont.preferredFont(forTextStyle: .caption1).lineHeight
 
         return CGSize(width: width, height: width + labelHeight + PGUI.margin / 2.0)
     }

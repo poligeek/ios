@@ -14,7 +14,7 @@ class PGRootShowCell: UICollectionViewCell {
         self.coverView.layer.masksToBounds = true
         self.coverView.backgroundColor = UIColor(white: 0, alpha: 0.1)
 
-        self.dateLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1)
+        self.dateLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         self.dateLabel.textColor = UIColor.lightGray
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
 

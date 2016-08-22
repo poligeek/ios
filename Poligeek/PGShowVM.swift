@@ -14,18 +14,18 @@ class PGShowVM: PGTableViewVM {
 
         let titleVM = PGTextVM(show.titleWithNumber)
         titleVM.vmType = PGShowVMTypeIds.title.rawValue
-        titleVM.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleTitle1)
+        titleVM.font = UIFont.preferredFont(forTextStyle: .title1)
         titleVM.textAlignment = .center
 
         let dateVM = PGTextVM(show.releaseDate.pg_mediumDate())
         dateVM.vmType = PGShowVMTypeIds.date.rawValue
-        dateVM.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleFootnote)
+        dateVM.font = UIFont.preferredFont(forTextStyle: .footnote)
         dateVM.textAlignment = .center
         dateVM.textColor = UIColor.lightGray
 
         let listenVM = PGTextVM(NSLocalizedString("ui.show.listen", comment: ""))
         listenVM.vmType = PGShowVMTypeIds.listen.rawValue
-        listenVM.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+        listenVM.font = UIFont.preferredFont(forTextStyle: .body)
         listenVM.textAlignment = .center
         listenVM.textColor = PGUI.tintColor
         listenVM.isSelectable = true
@@ -35,7 +35,7 @@ class PGShowVM: PGTableViewVM {
 
         let downloadVM = PGTextVM(NSLocalizedString("ui.show.download", comment: ""))
         downloadVM.vmType = PGShowVMTypeIds.downloadShare.rawValue
-        downloadVM.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+        downloadVM.font = UIFont.preferredFont(forTextStyle: .body)
         downloadVM.textAlignment = .center
         downloadVM.textColor = PGUI.tintColor
         downloadVM.isSelectable = true
@@ -66,7 +66,7 @@ class PGShowCoverVM: PGViewModel {
 
 class PGTextVM: PGViewModel {
     var text: String
-    var font: UIFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+    var font: UIFont = UIFont.preferredFont(forTextStyle: .body)
     var textAlignment = NSTextAlignment.left
     var textColor = UIColor.darkText
 

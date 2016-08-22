@@ -43,9 +43,9 @@ struct PGShow
         let durationValues = durationString.components(separatedBy: ":")
         var duration: TimeInterval = 0.0
         for i in 0..<durationValues.count {
-            let factor = pow(60, durationValues.count - 1 - i)
+            let factor = pow(Double(60.0), Double(durationValues.count - 1 - i))
             guard let value = Double(durationValues[durationValues.count - 1 - i]) else { return nil }
-            duration += value * Double(factor)
+            duration += value * factor
         }
 
         self.identifier = identifier
