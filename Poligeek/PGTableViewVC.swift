@@ -47,13 +47,6 @@ class PGTableViewController: UITableViewController {
 
         if let selectedRowIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
-            self.transitionCoordinator?.notifyWhenInteractionChanges() { (context) in
-                if context.isCancelled {
-                    self.tableView.selectRow(at: selectedRowIndexPath, animated: false, scrollPosition: .none)
-                } else {
-                    self.tableView.reloadData()
-                }
-            }
         }
     }
 
