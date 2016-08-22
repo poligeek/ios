@@ -56,10 +56,10 @@ class PGShowVM: PGTableViewVM {
 }
 
 class PGShowCoverVM: PGViewModel {
-    var coverPath: String
+    var coverURL: URL
 
     init(show: PGShow) {
-        self.coverPath = "cover"
+        self.coverURL = show.largeCoverURL
         super.init()
     }
 }

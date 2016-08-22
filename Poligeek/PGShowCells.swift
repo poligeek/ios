@@ -18,7 +18,8 @@ class PGCoverShowCell: PGTableViewCell {
     }
 
     override func pg_configure(viewModel: PGViewModel) {
-        self.coverView.image = UIImage(named: "cover")
+        guard let vm = viewModel as? PGShowCoverVM else { return }
+        self.coverView.pg_setImage(url: vm.coverURL, placeholder: #imageLiteral(resourceName: "default-cover"))
     }
 
     required init?(coder aDecoder: NSCoder) {

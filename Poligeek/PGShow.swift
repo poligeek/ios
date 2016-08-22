@@ -14,10 +14,10 @@ struct PGShow
     let text: String
 
     var largeCoverURL: URL {
-        return URL(string: "http://storage.poligeek.fr/assets/cover\(self.number).png")!
+        return URL(string: "http://storage.poligeek.fr/assets/cover\(self.number).jpg")!
     }
     var smallCoverURL: URL {
-        return URL(string: "http://storage.poligeek.fr/assets/cover\(self.number)-small.png")!
+        return URL(string: "http://storage.poligeek.fr/assets/cover\(self.number)-small.jpg")!
     }
     var fileURL: URL {
         return URL(string: "http://storage.poligeek.fr/shows/show\(self.number).mp3")!
