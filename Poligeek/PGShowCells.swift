@@ -10,9 +10,9 @@ class PGCoverShowCell: PGTableViewCell {
         self.coverView.contentMode = .scaleAspectFit
         self.contentView.addSubview(self.coverView)
 
-        self.coverView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: PGUI.cellInset.left).isActive = true
+        self.coverView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         self.coverView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        self.coverView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -PGUI.cellInset.right).isActive = true
+        self.coverView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         self.coverView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
         self.coverView.heightAnchor.constraint(equalTo: self.coverView.widthAnchor).isActive = true
     }
