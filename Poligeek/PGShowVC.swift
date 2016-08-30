@@ -6,15 +6,8 @@ class PGShowVC: PGTableViewController {
     
     let showVM: PGShowVM
     let closeButton = UIButton()
-    let statusBarBackground = UIView()
-    var statusBarHidden: Bool = false
+    let topShadow = UIView()
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
 
     init(showVM: PGShowVM) {
         self.showVM = showVM
@@ -42,58 +35,39 @@ class PGShowVC: PGTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 0.0000001
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.statusBarBackground.backgroundColor = PGUI.tintColor
-        self.tableView.addSubview(self.statusBarBackground)
-        self.statusBarBackground.frame = CGRect(x: 0, y: 0, width: 1000, height: 20)
-
-
-        self.closeButton.backgroundColor = UIColor.green
+        self.closeButton.setImage(#imageLiteral(resourceName: "close-arrow"), for: .normal)
+        self.closeButton.setImage(#imageLiteral(resourceName: "close-arrow-selected"), for: .highlighted)
         self.closeButton.addTarget(self, action: #selector(onClose), for: .touchUpInside)
         self.tableView.addSubview(self.closeButton)
-        self.closeButton.frame = CGRect(x: PGUI.margin, y: PGUI.margin + 20, width: 44, height: 44)
+        self.closeButton.frame = CGRect(x: UIScreen.main.bounds.width - PGUI.margin - 44, y: 20, width: 44, height: 44)
+
+        let layer = CAGradientLayer()
+        layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40)
+        layer.colors = [PGUI.tintColor.cgColor, PGUI.tintColor.withAlphaComponent(0).cgColor]
+        self.topShadow.layer.addSublayer(layer)
+        self.tableView.addSubview(self.topShadow)
+        self.topShadow.frame = layer.frame
     }
 
     func onClose() {
         self.dismiss(animated: true, completion: nil)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        self.statusBarHidden = true
-        self.setNeedsStatusBarAppearanceUpdate()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.statusBarHidden = false
-        self.setNeedsStatusBarAppearanceUpdate()
-    }
-
     override func viewDidLayoutSubviews() {
-        print(min(0, self.tableView.contentOffset.y))
-
         let firstCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        firstCell?.frame.origin.y = min(0, self.tableView.contentOffset.y)
 
-        if self.tableView.contentOffset.y < 0 {
-            firstCell?.frame.origin.y = self.tableView.contentOffset.y + 20
-        } else {
-            firstCell?.frame.origin.y = 20
-        }
         let transform = CGAffineTransform(translationX: 0, y: min(0, self.tableView.contentOffset.y))
-
-//        firstCell?.transform = transform
-        self.statusBarBackground.transform = transform
+        self.topShadow.transform = transform
         self.closeButton.transform = transform
 
-        self.tableView.bringSubview(toFront: self.statusBarBackground)
+        self.tableView.bringSubview(toFront: self.topShadow)
         self.tableView.bringSubview(toFront: self.closeButton)
     }
 
