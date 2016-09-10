@@ -83,8 +83,10 @@ class PGRootVC: UICollectionViewController {
         let show = self.profile.shows[indexPath.row]
         let showVM = PGShowVM(show: show)
         let showVC = PGShowVC(showVM: showVM)
+        let navVC = showVC.pg_embedInNavC()
+        navVC.isNavigationBarHidden = true
 
-        self.navigationController?.pushViewController(showVC, animated: true)
+        self.navigationController?.present(navVC, animated: true, completion: nil)
     }
 }
 

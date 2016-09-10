@@ -57,6 +57,14 @@ class PGTableViewController: UITableViewController {
 
     // Data source
 
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return PGUI.tableViewSectionHeaderHeight
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return PGUI.tableViewSectionFooterHeight
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewVM.numberOfSections
     }

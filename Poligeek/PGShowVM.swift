@@ -16,12 +16,14 @@ class PGShowVM: PGTableViewVM {
         titleVM.vmType = PGShowVMTypeIds.title.rawValue
         titleVM.font = UIFont.preferredFont(forTextStyle: .title1)
         titleVM.textAlignment = .center
+        titleVM.textInset = UIEdgeInsets(top: 0, left: PGUI.cellInset.left, bottom: 0, right: PGUI.cellInset.right)
 
         let dateVM = PGTextVM(show.releaseDate.pg_mediumDate())
         dateVM.vmType = PGShowVMTypeIds.date.rawValue
         dateVM.font = UIFont.preferredFont(forTextStyle: .footnote)
         dateVM.textAlignment = .center
         dateVM.textColor = UIColor.lightGray
+        dateVM.textInset = UIEdgeInsets(top: 0, left: PGUI.cellInset.left, bottom: 0, right: PGUI.cellInset.right)
 
         let listenVM = PGTextVM(NSLocalizedString("ui.show.listen", comment: ""))
         listenVM.vmType = PGShowVMTypeIds.listen.rawValue
@@ -69,6 +71,7 @@ class PGTextVM: PGViewModel {
     var font: UIFont = UIFont.preferredFont(forTextStyle: .body)
     var textAlignment = NSTextAlignment.left
     var textColor = UIColor.darkText
+    var textInset = PGUI.cellInset
 
     var onSelect: (() -> Void)?
 
