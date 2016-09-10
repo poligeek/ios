@@ -47,13 +47,6 @@ class PGTableViewController: UITableViewController {
 
         if let selectedRowIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
-            self.transitionCoordinator?.notifyWhenInteractionChanges() { (context) in
-                if context.isCancelled {
-                    self.tableView.selectRow(at: selectedRowIndexPath, animated: false, scrollPosition: .none)
-                } else {
-                    self.tableView.reloadData()
-                }
-            }
         }
     }
 
@@ -63,6 +56,14 @@ class PGTableViewController: UITableViewController {
     }
 
     // Data source
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return PGUI.tableViewSectionHeaderHeight
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return PGUI.tableViewSectionFooterHeight
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewVM.numberOfSections

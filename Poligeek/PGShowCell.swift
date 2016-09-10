@@ -8,13 +8,13 @@ class PGRootShowCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.coverView.image = UIImage(named: "cover")
+        self.coverView.image = #imageLiteral(resourceName: "default-cover")
         self.coverView.translatesAutoresizingMaskIntoConstraints = false
         self.coverView.layer.cornerRadius = 4
         self.coverView.layer.masksToBounds = true
         self.coverView.backgroundColor = UIColor(white: 0, alpha: 0.1)
 
-        self.dateLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1)
+        self.dateLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
         self.dateLabel.textColor = UIColor.lightGray
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -38,6 +38,7 @@ class PGRootShowCell: UICollectionViewCell {
 
     func configure(show: PGShow) {
         self.dateLabel.text = show.releaseDate.pg_mediumDate()
+        self.coverView.pg_setImage(url: show.smallCoverURL, placeholder: #imageLiteral(resourceName: "default-cover"))
     }
 
     required init?(coder aDecoder: NSCoder) {

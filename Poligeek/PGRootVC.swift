@@ -48,7 +48,7 @@ class PGRootVC: UICollectionViewController {
 
         let width = (availableWidth - (numberOfItems - 1) * self.flowLayout.minimumInteritemSpacing) / CGFloat(numberOfItems)
 
-        let labelHeight = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1).lineHeight
+        let labelHeight = UIFont.preferredFont(forTextStyle: .caption1).lineHeight
 
         return CGSize(width: width, height: width + labelHeight + PGUI.margin / 2.0)
     }
@@ -83,8 +83,10 @@ class PGRootVC: UICollectionViewController {
         let show = self.profile.shows[indexPath.row]
         let showVM = PGShowVM(show: show)
         let showVC = PGShowVC(showVM: showVM)
+        let navVC = showVC.pg_embedInNavC()
+        navVC.isNavigationBarHidden = true
 
-        self.navigationController?.pushViewController(showVC, animated: true)
+        self.navigationController?.present(navVC, animated: true, completion: nil)
     }
 }
 
