@@ -8,6 +8,9 @@ class PGShowVC: PGTableViewController {
     let closeButton = UIButton()
     let topShadow = UIView()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     init(showVM: PGShowVM) {
         self.showVM = showVM
@@ -22,8 +25,8 @@ class PGShowVC: PGTableViewController {
         self.viewModelViewAssociation = [PGShowVMTypeIds.cover.rawValue         : PGCoverShowCell.self,
                                          PGShowVMTypeIds.title.rawValue         : PGTextCell.self,
                                          PGShowVMTypeIds.date.rawValue          : PGTextCell.self,
-                                         PGShowVMTypeIds.listen.rawValue        : PGTextCell.self,
-                                         PGShowVMTypeIds.downloadShare.rawValue : PGTextCell.self,
+                                         PGShowVMTypeIds.listen.rawValue        : PGActionCell.self,
+                                         PGShowVMTypeIds.downloadShare.rawValue : PGActionCell.self,
                                          PGShowVMTypeIds.notes.rawValue         : PGHTMLCell.self,]
         
         self.viewModelsBackgroundColors = [PGShowVMTypeIds.listen.rawValue          : UIColor.white,
@@ -32,10 +35,6 @@ class PGShowVC: PGTableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.0000001
     }
 
     override func viewDidLoad() {
@@ -48,7 +47,7 @@ class PGShowVC: PGTableViewController {
         self.closeButton.frame = CGRect(x: UIScreen.main.bounds.width - PGUI.margin - 44, y: 20, width: 44, height: 44)
 
         let layer = CAGradientLayer()
-        layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40)
+        layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30)
         layer.colors = [PGUI.tintColor.cgColor, PGUI.tintColor.withAlphaComponent(0).cgColor]
         self.topShadow.layer.addSublayer(layer)
         self.tableView.addSubview(self.topShadow)
@@ -61,11 +60,10 @@ class PGShowVC: PGTableViewController {
 
     override func viewDidLayoutSubviews() {
         let firstCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
-        firstCell?.frame.origin.y = min(0, self.tableView.contentOffset.y)
+        firstCell?.frame.origin.y = min(-20, self.tableView.contentOffset.y)
 
-        let transform = CGAffineTransform(translationX: 0, y: min(0, self.tableView.contentOffset.y))
-        self.topShadow.transform = transform
-        self.closeButton.transform = transform
+        self.topShadow.transform = CGAffineTransform(translationX: 0, y: self.tableView.contentOffset.y)
+        self.closeButton.transform = CGAffineTransform(translationX: 0, y: min(-20, self.tableView.contentOffset.y))
 
         self.tableView.bringSubview(toFront: self.topShadow)
         self.tableView.bringSubview(toFront: self.closeButton)

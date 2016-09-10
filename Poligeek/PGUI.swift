@@ -26,5 +26,7 @@ struct PGUI {
                                         bottom: PGUI.margin,
                                         right: 13.0)
     static let cellHeight: CGFloat = 44
+    static let tableViewSectionHeaderHeight: CGFloat = 10
+    static let tableViewSectionFooterHeight: CGFloat = 10
 
 }

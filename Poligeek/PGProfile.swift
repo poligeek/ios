@@ -7,7 +7,7 @@ class PGProfile
 
     func reloadShows(completion: (([PGShow]?, Error?) -> Void)?) throws
     {
-        guard let url = URL(string: "http://poligeek.fr/api") else { throw PGProfileError.InvalidURL }
+        guard let url = URL(string: "http://localhost:4000/api") else { throw PGProfileError.InvalidURL }
 
         let urlSession = URLSession.shared
         let task = urlSession.dataTask(with: url) { data, reponse, error in
