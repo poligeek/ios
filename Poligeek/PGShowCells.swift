@@ -71,14 +71,20 @@ class PGActionCell: PGTextCell {
     }
 }
 
-class PGHTMLCell: PGTableViewCell, UIWebViewDelegate {
-    let label = UILabel()
+class PGHTMLCell: PGTableViewCell, UIWebViewDelegate, UITextViewDelegate {
+    let label = UITextView()
+    var heightConstraint: NSLayoutConstraint?
+    var viewModel: PGHTMLVM?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.label.translatesAutoresizingMaskIntoConstraints = false
-        self.label.numberOfLines = 0
+        self.label.isEditable = false
+        self.label.delegate = self
+        self.label.contentInset = UIEdgeInsets.zero
+        self.label.isScrollEnabled = false
+        self.label.backgroundColor = UIColor.clear
         self.contentView.addSubview(self.label)
 
         self.label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: PGUI.cellInset.left).isActive = true
@@ -86,15 +92,20 @@ class PGHTMLCell: PGTableViewCell, UIWebViewDelegate {
         self.label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -PGUI.cellInset.right).isActive = true
         self.label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -PGUI.cellInset.bottom).isActive = true
 
-        self.contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: PGUI.cellHeight).isActive = true
+        heightConstraint = self.contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: PGUI.cellHeight)
+        heightConstraint?.isActive = true
     }
 
     override func pg_configure(viewModel: PGViewModel) {
         guard let vm = viewModel as? PGHTMLVM else { return }
+        self.viewModel = vm;
 
         let html = vm.text.appending("<style>\(self.css())</style>")
 
         let attributedString = try? NSAttributedString(data: html.data(using: String.Encoding.utf16)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+        if let textFrame = attributedString?.boundingRect(with: CGSize(width: UIScreen.main.bounds.width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil) {
+            heightConstraint?.constant = textFrame.height
+        }
 
         self.label.attributedText = attributedString
     }
@@ -105,6 +116,11 @@ class PGHTMLCell: PGTableViewCell, UIWebViewDelegate {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        self.viewModel?.hypertextLinkSelected?(URL)
+        return false
     }
 }
 
