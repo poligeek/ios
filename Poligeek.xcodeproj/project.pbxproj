@@ -18,6 +18,8 @@
 		A62DA6D81D5F619100930FAA /* PGShowHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62DA6D71D5F619100930FAA /* PGShowHelpers.swift */; };
 		A62DA6DA1D5FCB2A00930FAA /* SFMono-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A62DA6D91D5FCB2A00930FAA /* SFMono-Heavy.otf */; };
 		A62DA6EC1D611C0F00930FAA /* PGColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62DA6EB1D611C0F00930FAA /* PGColorHelper.swift */; };
+		A673AFE81DC94819003C8E79 /* PGSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A673AFE71DC94819003C8E79 /* PGSource.swift */; };
+		A673AFEA1DC94824003C8E79 /* PGBigUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A673AFE91DC94824003C8E79 /* PGBigUp.swift */; };
 		A6D0494B1D8490E400D4E1A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6D0494D1D8490E400D4E1A8 /* Localizable.strings */; };
 		A6F257C61D560E780028C5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F257C51D560E780028C5B6 /* AppDelegate.swift */; };
 		A6F257C81D560E780028C5B6 /* PGRootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F257C71D560E780028C5B6 /* PGRootVC.swift */; };
@@ -45,6 +47,8 @@
 		A62DA6D71D5F619100930FAA /* PGShowHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGShowHelpers.swift; sourceTree = "<group>"; };
 		A62DA6D91D5FCB2A00930FAA /* SFMono-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFMono-Heavy.otf"; sourceTree = "<group>"; };
 		A62DA6EB1D611C0F00930FAA /* PGColorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGColorHelper.swift; sourceTree = "<group>"; };
+		A673AFE71DC94819003C8E79 /* PGSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGSource.swift; sourceTree = "<group>"; };
+		A673AFE91DC94824003C8E79 /* PGBigUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PGBigUp.swift; sourceTree = "<group>"; };
 		A6D049481D8490B700D4E1A8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A6D0494C1D8490E400D4E1A8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A6D0494F1D8490F900D4E1A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				A6F257D71D56151B0028C5B6 /* PGShow.swift */,
+				A673AFE71DC94819003C8E79 /* PGSource.swift */,
+				A673AFE91DC94824003C8E79 /* PGBigUp.swift */,
 				A62DA6D71D5F619100930FAA /* PGShowHelpers.swift */,
 			);
 			name = Model;
@@ -277,7 +283,9 @@
 				A6F257E91D568A860028C5B6 /* PGShowCell.swift in Sources */,
 				A6F257EB1D5694490028C5B6 /* PGDateHelpers.swift in Sources */,
 				A6F257C81D560E780028C5B6 /* PGRootVC.swift in Sources */,
+				A673AFE81DC94819003C8E79 /* PGSource.swift in Sources */,
 				A6F257C61D560E780028C5B6 /* AppDelegate.swift in Sources */,
+				A673AFEA1DC94824003C8E79 /* PGBigUp.swift in Sources */,
 				A6F257E41D5680120028C5B6 /* PGViewControllerHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

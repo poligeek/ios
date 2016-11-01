@@ -2,7 +2,6 @@ import Foundation
 
 struct PGShow
 {
-
     let identifier: String
     let title: String
     let number: String
@@ -12,6 +11,34 @@ struct PGShow
     let duration: TimeInterval
     let keywords: [String]
     let text: String
+
+    let sources: [PGSource]?
+    let bigUps: [PGBigUp]?
+
+    let coverAuthor: String?
+    let coverName: String?
+    let coverURL: URL?
+
+    enum PGShowKeys: String
+    {
+        case identifier = "identifier"
+        case title = "title"
+        case number = "number"
+        case releaseDate = "date"
+        case recordDate = "record_date"
+        case shortDescription = "theme_debat"
+        case duration = "duration"
+        case keywords = "keywords"
+        case text = "text"
+
+        case sources = "sources"
+        case bigUps = "big_ups"
+
+        case cover = "cover"
+        case coverAuthor = "author"
+        case coverName = "name"
+        case coverURL = "url"
+    }
 
     var largeCoverURL: URL {
         return URL(string: "http://storage.poligeek.fr/assets/cover\(self.number).jpg")!
@@ -57,21 +84,30 @@ struct PGShow
         self.duration = duration
         self.keywords = keywords.components(separatedBy: ", ")
         self.text = text
+
+        if let sources = json[PGShowKeys.sources.rawValue] as? [[String: AnyObject]] {
+            self.sources = sources.flatMap { return PGSource(json: $0) }
+        } else {
+            self.sources = nil
+        }
+
+        if let bigUps = json[PGShowKeys.bigUps.rawValue] as? [[String: AnyObject]] {
+            self.bigUps = bigUps.flatMap { return PGBigUp(json: $0) }
+        } else {
+            self.bigUps = nil
+        }
+
+        if let coverAuthor = json[PGShowKeys.cover.rawValue]?[PGShowKeys.coverAuthor.rawValue] as? String,
+            let coverName = json[PGShowKeys.cover.rawValue]?[PGShowKeys.coverName.rawValue] as? String,
+            let coverLink = json[PGShowKeys.cover.rawValue]?[PGShowKeys.coverURL.rawValue] as? String,
+            let coverURL = URL(string: coverLink) {
+            self.coverAuthor = coverAuthor
+            self.coverName = coverName
+            self.coverURL = coverURL
+        } else {
+            self.coverAuthor = nil
+            self.coverName = nil
+            self.coverURL = nil
+        }
     }
-
-}
-
-enum PGShowKeys: String
-{
-
-    case identifier = "identifier"
-    case title = "title"
-    case number = "number"
-    case releaseDate = "date"
-    case recordDate = "record_date"
-    case shortDescription = "theme_debat"
-    case duration = "duration"
-    case keywords = "keywords"
-    case text = "text"
-    
 }
