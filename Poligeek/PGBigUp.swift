@@ -4,7 +4,7 @@ struct PGBigUp
 {
     let name: String
     let title: String
-    let url: URL
+    let url: URL?
 
     enum PGBigUpKeys: String
     {
@@ -17,11 +17,15 @@ struct PGBigUp
     {
         guard let name = json[PGBigUpKeys.name.rawValue] as? String else { return nil }
         guard let title = json[PGBigUpKeys.title.rawValue] as? String else { return nil }
-        guard let link = json[PGBigUpKeys.url.rawValue] as? String else { return nil }
-        guard let url = URL(string: link) else { return nil }
 
         self.name = name
         self.title = title
-        self.url = url
+
+        if let link = json[PGBigUpKeys.url.rawValue] as? String,
+            let url = URL(string: link) {
+            self.url = url
+        } else {
+            self.url = nil
+        }
     }
 }
