@@ -51,9 +51,32 @@ class PGShowVM: PGTableViewVM {
             self.displayWebPage?(url)
         }
 
-        self.sectionViewModels = [PGTableViewSectionVM(viewModels: [coverVM, titleVM, dateVM]),
-                                  PGTableViewSectionVM(viewModels: [listenVM, downloadVM]),
-                                  PGTableViewSectionVM(viewModels: [notesVM]),]
+        var sectionViewModels = [PGTableViewSectionVM(viewModels: [coverVM, titleVM, dateVM]),
+                                 PGTableViewSectionVM(viewModels: [listenVM, downloadVM]),
+                                 PGTableViewSectionVM(viewModels: [notesVM]),]
+
+        let sourcesVMs: [PGViewModel]? = show.sources?.map {
+            let vm = PGTextVM($0.title)
+            vm.vmType = PGShowVMTypeIds.source.rawValue
+            vm.accessory = .disclosureIndicator
+
+            let sourceURL = $0.url
+            let components = URLComponents(url: sourceURL, resolvingAgainstBaseURL: false)
+            vm.detailText = components?.host
+
+            vm.isSelectable = true
+            vm.onSelect = {
+                self.displayWebPage?(sourceURL)
+            }
+
+            return vm
+        }
+
+        if let sourcesVMs = sourcesVMs {
+            sectionViewModels.append(PGTableViewSectionVM(viewModels: sourcesVMs))
+        }
+
+        self.sectionViewModels = sectionViewModels
     }
 }
 
@@ -72,6 +95,13 @@ class PGTextVM: PGViewModel {
     var textAlignment = NSTextAlignment.left
     var textColor = UIColor.darkText
     var textInset = PGUI.cellInset
+
+    var detailText: String?
+    var detailFont: UIFont = UIFont.preferredFont(forTextStyle: .caption1)
+    var detailTextAlignment = NSTextAlignment.left
+    var detailTextColor = UIColor.gray
+
+    var accessory: UITableViewCellAccessoryType = .none
 
     var onSelect: (() -> Void)?
 
@@ -102,4 +132,7 @@ enum PGShowVMTypeIds: String {
     case listen
     case downloadShare
     case notes
+    case source
+    case bigUp
+    case coverSource
 }

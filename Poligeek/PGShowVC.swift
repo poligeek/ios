@@ -27,10 +27,14 @@ class PGShowVC: PGTableViewController {
                                          PGShowVMTypeIds.date.rawValue          : PGTextCell.self,
                                          PGShowVMTypeIds.listen.rawValue        : PGActionCell.self,
                                          PGShowVMTypeIds.downloadShare.rawValue : PGActionCell.self,
-                                         PGShowVMTypeIds.notes.rawValue         : PGHTMLCell.self,]
+                                         PGShowVMTypeIds.notes.rawValue         : PGHTMLCell.self,
+                                         PGShowVMTypeIds.source.rawValue        : PGTextCell.self,
+        ]
         
         self.viewModelsBackgroundColors = [PGShowVMTypeIds.listen.rawValue          : UIColor.white,
-                                           PGShowVMTypeIds.downloadShare.rawValue   : UIColor.white]
+                                           PGShowVMTypeIds.downloadShare.rawValue   : UIColor.white,
+                                           PGShowVMTypeIds.source.rawValue          : UIColor.white,
+        ]
     }
     
     required init?(coder aDecoder: NSCoder) {

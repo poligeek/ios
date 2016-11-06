@@ -28,32 +28,73 @@ class PGCoverShowCell: PGTableViewCell {
 }
 
 class PGTextCell: PGTableViewCell {
-    let label = UILabel()
-
+	let label = UILabel()
+	let detailLabel = UILabel()
+	
+	let stackView = UIStackView()
+	var topConstraint: NSLayoutConstraint? = nil
+	var leadingConstraint: NSLayoutConstraint? = nil
+	var trailingConstraint: NSLayoutConstraint? = nil
+	var bottomConstraint: NSLayoutConstraint? = nil
+	
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
 
-        self.label.translatesAutoresizingMaskIntoConstraints = false
         self.label.numberOfLines = 0
-        self.contentView.addSubview(self.label)
+        self.detailLabel.numberOfLines = 0
+	
+		self.stackView.translatesAutoresizingMaskIntoConstraints = false
+		self.stackView.axis = .vertical
+		self.stackView.spacing = 2
+		self.stackView.alignment = .fill
+		self.stackView.distribution = .equalSpacing
     }
 
     override func pg_configure(viewModel: PGViewModel) {
         guard let vm = viewModel as? PGTextVM else { return }
+		
+		self.contentView.addSubview(self.stackView)
 
+		for arrangedSubview in self.stackView.arrangedSubviews {
+			self.stackView.removeArrangedSubview(arrangedSubview)
+		}
+		
+		self.leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: vm.textInset.left)
+		self.topConstraint = self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: vm.textInset.top)
+		self.trailingConstraint = self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -vm.textInset.right)
+		self.bottomConstraint = self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -vm.textInset.bottom)
+		self.bottomConstraint?.priority = UILayoutPriorityDefaultHigh
+		
         self.label.text = vm.text
         self.label.font = vm.font
         self.label.textColor = vm.textColor
         self.label.textAlignment = vm.textAlignment
+        self.accessoryType = vm.accessory
+		
+		self.stackView.addArrangedSubview(self.label)
 
-        self.label.removeConstraints(self.label.constraints)
-
-        self.label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: vm.textInset.left).isActive = true
-        self.label.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: vm.textInset.top).isActive = true
-        self.label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -vm.textInset.right).isActive = true
-        self.label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -vm.textInset.bottom).isActive = true
+        if let detailText = vm.detailText {
+            self.detailLabel.text = detailText
+            self.detailLabel.font = vm.detailFont
+            self.detailLabel.textColor = vm.detailTextColor
+            self.detailLabel.textAlignment = vm.detailTextAlignment
+			
+			self.stackView.addArrangedSubview(self.detailLabel)
+        }
+		
+		self.leadingConstraint?.isActive = true
+		self.topConstraint?.isActive = true
+		self.trailingConstraint?.isActive = true
+		self.bottomConstraint?.isActive = true
     }
-
+	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		self.stackView.removeFromSuperview()
+		self.label.text = nil
+		self.detailLabel.text = nil
+	}
+	
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
