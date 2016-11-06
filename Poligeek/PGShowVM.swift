@@ -71,9 +71,31 @@ class PGShowVM: PGTableViewVM {
 
             return vm
         }
-
         if let sourcesVMs = sourcesVMs {
             sectionViewModels.append(PGTableViewSectionVM(viewModels: sourcesVMs))
+        }
+        
+        let bigUpVMs: [PGViewModel]? = show.bigUps?.map {
+            let vm = PGTextVM($0.name)
+            vm.vmType = PGShowVMTypeIds.bigUp.rawValue
+            vm.textColor = UIColor.gray
+            
+            vm.detailText = $0.title
+            vm.detailFont = UIFont.preferredFont(forTextStyle: .body)
+            vm.detailTextColor = UIColor.darkText
+            
+            if let url = $0.url {
+                vm.isSelectable = true
+                vm.onSelect = {
+                    self.displayWebPage?(url)
+                }
+                vm.accessory = .disclosureIndicator
+            }
+            
+            return vm
+        }
+        if let bigUpVMs = bigUpVMs {
+            sectionViewModels.append(PGTableViewSectionVM(viewModels: bigUpVMs))
         }
 
         self.sectionViewModels = sectionViewModels

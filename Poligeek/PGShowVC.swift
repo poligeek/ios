@@ -29,11 +29,13 @@ class PGShowVC: PGTableViewController {
                                          PGShowVMTypeIds.downloadShare.rawValue : PGActionCell.self,
                                          PGShowVMTypeIds.notes.rawValue         : PGHTMLCell.self,
                                          PGShowVMTypeIds.source.rawValue        : PGTextCell.self,
+                                         PGShowVMTypeIds.bigUp.rawValue         : PGTextCell.self,
         ]
         
         self.viewModelsBackgroundColors = [PGShowVMTypeIds.listen.rawValue          : UIColor.white,
                                            PGShowVMTypeIds.downloadShare.rawValue   : UIColor.white,
                                            PGShowVMTypeIds.source.rawValue          : UIColor.white,
+                                           PGShowVMTypeIds.bigUp.rawValue           : UIColor.white,
         ]
     }
     
