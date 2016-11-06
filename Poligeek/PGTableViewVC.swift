@@ -23,15 +23,11 @@ class PGTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = PGUI.cellHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.backgroundColor = PGUI.backgroundColor
+		self.tableView.separatorInset = PGUI.separatorInset
+		self.tableView.separatorStyle = .none
 
         for register in self.viewModelViewAssociation.values {
             self.tableView.pg_register(class: register)
-        }
-
-        if self.viewModelsBackgroundColors == nil {
-            self.tableView.separatorInset = UIEdgeInsets.zero
-        } else {
-            self.tableView.separatorStyle = .none
         }
 
         if let tableHeaderView = self.headerFooterView(viewModel: self.tableViewVM.headerViewModel) {
@@ -119,11 +115,23 @@ class PGTableViewController: UITableViewController {
             if let color = colors[viewModel.vmType] {
                 cell.backgroundColor = color
                 cell.backgroundView = nil
-            } else {
-                cell.backgroundColor = nil
-                cell.backgroundView = nil
-                cell.separatorInset = UIEdgeInsets(top: 0, left: CGFloat.infinity, bottom: 0, right: 0)
-            }
+					
+				if indexPath.row == 0 {
+					cell.pg_setTopSeparator(color: self.tableView.separatorColor, insets: UIEdgeInsets.zero)
+				} else {
+					cell.pg_setTopSeparator(color: nil, insets: UIEdgeInsets.zero)
+				}
+				if indexPath.row == self.tableViewVM.numberOfRows(section: indexPath.section) - 1 {
+					cell.pg_setSeparator(color: self.tableView.separatorColor, insets: UIEdgeInsets.zero)
+				} else {
+					cell.pg_setSeparator(color: self.tableView.separatorColor, insets: cell.separatorInset)
+				}
+			} else {
+				cell.backgroundColor = nil
+				cell.backgroundView = nil
+				cell.pg_setTopSeparator(color: nil, insets: cell.separatorInset)
+				cell.pg_setSeparator(color: nil, insets: cell.separatorInset)
+			}
         }
     }
 
