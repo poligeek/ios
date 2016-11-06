@@ -97,6 +97,20 @@ class PGShowVM: PGTableViewVM {
         if let bigUpVMs = bigUpVMs {
             sectionViewModels.append(PGTableViewSectionVM(viewModels: bigUpVMs))
         }
+        
+        if let coverName = show.coverName, let coverAuthor = show.coverAuthor {
+            let coverSourceVMText = String(format: NSLocalizedString("ui.show.coverSource.by", comment: ""), coverName, coverAuthor)
+            let coverSourceVM = PGTextVM(coverSourceVMText)
+            coverSourceVM.vmType = PGShowVMTypeIds.coverSource.rawValue
+            if let url = show.coverURL {
+                coverSourceVM.isSelectable = true
+                coverSourceVM.onSelect = {
+                    self.displayWebPage?(url)
+                }
+                coverSourceVM.accessory = .disclosureIndicator
+            }
+            sectionViewModels.append(PGTableViewSectionVM(viewModels: [coverSourceVM]))
+        }
 
         self.sectionViewModels = sectionViewModels
     }

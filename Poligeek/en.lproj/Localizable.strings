@@ -1,3 +1,4 @@
 "ui.poligeek" = "Poligeek";
 "ui.show.listen" = "Listen";
 "ui.show.download" = "Download";
+"ui.show.coverSource.by" = "%@, by %@.";
